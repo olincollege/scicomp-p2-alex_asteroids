@@ -4,7 +4,14 @@ This is a template repository for a Python project. Feel free to use and edit
 this repository (including this file) for your needs. Below, find some
 instructions and tips for using this template repository.
 
+## To-do:
+- fill out README
+- currently data must be downloaded manually, and then the paths need to be changed in the txt_csv_converter.py file -> add 'requests' package here to automate this process
+
 ## How to Use
+
+-> data file is too big to upload to github
+--> need to include directions for how to download the data from the website and probably have a script to run to turn it into an excel spreadsheet?
 
 Click on the "Use this template" button in the top right corner to create a new
 repository based on this template. If this is for a class project, we ask that
