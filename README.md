@@ -17,6 +17,26 @@ Link to original dataset: https://newton.spacedys.com/astdys2/index.php?pc=5
 ## Key Simulation Variables
 a, e, i -> sin(i) in the data, but turned into i
 
+### Visual Exploration of Asteroid Data
+<table>
+  <tr>
+    <td align="center">
+      <img src="images/2D_a_vs_i.png" height="300"><br>
+      Semi-major axis (AU) vs. Inclination (°)
+    </td>
+    <td align="center">
+      <img src="images/2D_e_vs_i.png" height="300"><br>
+      Eccentricity vs. Inclination (°)
+    </td>
+    <td align="center">
+      <img src="images/3D_visible_clusters.png" height="350"><br>
+      3D representation of clusters (a, e, i)
+    </td>
+  </tr>
+</table>
+
+The 2D and 3D representations show the clusters that appear in the asteroid data when looking at constrainted a, e, and i parameters.
+
 ## Usage Examples & Benchmarks
 
 ## Requirements
