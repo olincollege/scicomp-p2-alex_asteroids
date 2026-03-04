@@ -21,15 +21,15 @@ a, e, i -> sin(i) in the data, but turned into i
 <table>
   <tr>
     <td align="center">
-      <img src="images/2D_a_vs_i.png" height="300"><br>
+      <img src="images/2D_a_vs_i.png" width="600"><br>
       Semi-major axis (AU) vs. Inclination (°)
     </td>
     <td align="center">
-      <img src="images/2D_e_vs_i.png" height="300"><br>
+      <img src="images/2D_e_vs_i.png" width="600"><br>
       Eccentricity vs. Inclination (°)
     </td>
     <td align="center">
-      <img src="images/3D_visible_clusters.png" height="350"><br>
+      <img src="images/3D_visible_clusters.png" width="600"><br>
       3D representation of clusters (a, e, i)
     </td>
   </tr>
