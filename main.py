@@ -10,3 +10,5 @@ Contains main script to run machine learning algorithms on the data.
 # - Determine what machine learning methods I want to try (done) -> K-means and Heirarchical clustering (more notes on this in my notes doc)
 # - Determine which asteroid families I will attempt to identify and why
 # - Research clustering method 1
+
+# - input official labeled dataset, figure out how to compare the clusters from the labeled output dataset to the official set -> get correctness score
