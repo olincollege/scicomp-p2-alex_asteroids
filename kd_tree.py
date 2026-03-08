@@ -8,7 +8,7 @@ from sklearn.neighbors import KDTree
 import pandas as pd
 
 # set these values!! #
-radius = 0.002
+radius = 0.001
 a_AU_min = 2.5 #2
 a_AU_max = 3.3 #3.5
 # a_AU_min = 2.825
@@ -91,41 +91,64 @@ def hcm_clustering(data, radius):
 X = subset[['a_AU', 'e', 'sin_I']].values # only running subset!
 
 clusters = hcm_clustering(X, radius=radius)
+num_clusters = len(clusters)
+print("Number of clusters:", num_clusters)
 
-print("Number of clusters:", len(clusters))
-
-# Labeling the dataset
-labels = np.full(len(X), -1)
+##### Labeling the dataset, removing clusters smaller than 50 #####
+labels = np.full(len(X), -1) # -1 if cluster too small
+min_size = 50
 
 for cid, cluster in enumerate(clusters):
-    for idx in cluster:
-        labels[idx] = cid
+    if len(cluster) >= min_size:
+        labels[cluster] = cid
 
-subset['cluster'] = labels
+subset['cluster_id'] = labels
+
+##### saving data for comparison #####
+df['cluster_id'] = -1
+df.loc[subset.index, 'cluster_id'] = labels
+labeled_csv_path = base_path + "asteroid_clusters_full.csv"
+df.to_csv(labeled_csv_path, index=False)
+print(f"Labeled dataset saved to: {labeled_csv_path}")
+
+##### saving summary dataset #####
+cluster_summary = pd.DataFrame({
+    'cluster_id': [cid for cid, c in enumerate(clusters) if len(c) >= min_size],
+    'size': [len(c) for c in clusters if len(c) >= min_size],
+    }
+)
 
 
-# Visualize the clusters
+cluster_sizes = [len(c) for c in clusters]
+# 
+
+
+
+
+# Visualize the clusters #
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D  # ensures 3D projection works
 
 # --- a vs sin(i) ---
 plt.figure()
-plt.scatter(subset['a_AU'], subset['sin_I'], c=subset['cluster'], s=2)
+plt.scatter(subset['a_AU'], subset['sin_I'], c=subset['cluster_id'], s=2)
 plt.xlabel("a (AU)")
 plt.ylabel("sin(i)")
 plt.title("Semi-major axis (a) vs. Inclination (sin(i))")
-# plt.show()
-plt.savefig("a_vs_sini.png")
+plt.figtext(0.5, 0.01, f"Number of clusters: {num_clusters}, HCM radius: {radius}", 
+            ha="center", fontsize=10)
+plt.savefig("a_vs_sini.png", dpi=300, bbox_inches='tight')
 plt.close()
 
 # --- e vs sin(i) ---
 plt.figure()
-plt.scatter(subset['e'], subset['sin_I'], c=subset['cluster'], s=2)
+plt.scatter(subset['e'], subset['sin_I'], c=subset['cluster_id'], s=2)
 plt.xlabel("e")
 plt.ylabel("sin(i)")
 plt.title("Eccentricity vs. Inclination (sin(i))")
-# plt.show()
-plt.savefig("e_vs_sini.png")
+plt.figtext(0.5, 0.01, f"Number of clusters: {num_clusters}, HCM radius: {radius}", 
+            ha="center", fontsize=10)
+plt.savefig("a_vs_sini.png", dpi=300, bbox_inches='tight')
 plt.close()
 
 # --- 3D plot ---
@@ -136,8 +159,8 @@ ax.scatter(
     subset['a_AU'],
     subset['e'],
     subset['sin_I'],
-    c=subset['cluster'],   # color by cluster
-    s=1,
+    c=subset['cluster_id'],   # color by cluster
+    s=0.01,
     alpha=0.2
 )
 
