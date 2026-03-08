@@ -8,7 +8,7 @@ from sklearn.neighbors import KDTree
 import pandas as pd
 
 # set these values!! #
-radius = 0.001
+radius = 0.0012
 a_AU_min = 2.5 #2
 a_AU_max = 3.3 #3.5
 # a_AU_min = 2.825
@@ -117,12 +117,9 @@ cluster_summary = pd.DataFrame({
     'size': [len(c) for c in clusters if len(c) >= min_size],
     }
 )
-
-
-cluster_sizes = [len(c) for c in clusters]
-# 
-
-
+summary_csv_path = base_path + "asteroid_clusters_summary.csv"
+df.to_csv(summary_csv_path, index=False)
+print(f"Labeled dataset saved to: {summary_csv_path}")
 
 
 # Visualize the clusters #
