@@ -8,7 +8,7 @@ from sklearn.neighbors import KDTree
 import pandas as pd
 
 # set these values!! #
-radius = 0.0015
+radius = 0.0018
 a_AU_min = 2.5 #2
 a_AU_max = 3.3 #3.5
 # a_AU_min = 2.825
@@ -91,8 +91,8 @@ def hcm_clustering(data, radius):
 X = subset[['a_AU', 'e', 'sin_I']].values # only running subset!
 
 clusters = hcm_clustering(X, radius=radius)
-num_clusters = len(clusters)
-print("Number of clusters:", num_clusters)
+raw_num_clusters = len(clusters)
+print("Raw number of clusters:", raw_num_clusters)
 
 
 
@@ -133,6 +133,7 @@ from mpl_toolkits.mplot3d import Axes3D  # ensures 3D projection works
 
 clustered = subset['cluster_id'] >= 0
 unclustered = subset['cluster_id'] == -1
+num_clustered_filtered = len(clustered)
 
 # --- a vs sin(i) ---
 plt.figure()
@@ -149,7 +150,7 @@ plt.scatter(
 plt.xlabel("a (AU)")
 plt.ylabel("sin(i)")
 plt.title("Semi-major axis (a) vs. Inclination (sin(i))")
-plt.figtext(0.5, 0.005, f"Number of clusters: {num_clusters}, HCM radius: {radius}", 
+plt.figtext(0.5, 0.001, f"Raw # of clusters: {raw_num_clusters}, Filtered # of clusters: {num_clustered_filtered}, HCM radius: {radius}", 
             ha="center", fontsize=10)
 plt.savefig("a_vs_sini.png", dpi=300, bbox_inches='tight')
 plt.close()
@@ -169,7 +170,7 @@ plt.scatter(
 plt.xlabel("e")
 plt.ylabel("sin(i)")
 plt.title("Eccentricity vs. Inclination (sin(i))")
-plt.figtext(0.5, 0.005, f"Number of clusters: {num_clusters}, HCM radius: {radius}", 
+plt.figtext(0.5, 0.001, f"Raw # of clusters: {raw_num_clusters}, Filtered # of clusters: {num_clustered_filtered}, HCM radius: {radius}", 
             ha="center", fontsize=10)
 plt.savefig("e_vs_sini.png", dpi=300, bbox_inches='tight')
 plt.close()
@@ -179,12 +180,12 @@ fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
 # Plot unclustered points in gray
-ax.scatter(
-    subset.loc[unclustered, 'a_AU'],
-    subset.loc[unclustered, 'e'],
-    subset.loc[unclustered, 'sin_I'],
-    c='lightgray', s=0.01, alpha=0.2, label='Unclustered'
-)
+# ax.scatter(
+#     subset.loc[unclustered, 'a_AU'],
+#     subset.loc[unclustered, 'e'],
+#     subset.loc[unclustered, 'sin_I'],
+#     c='lightgray', s=0.01, alpha=0.2, label='Unclustered'
+# )
 
 sc = ax.scatter(
     subset.loc[clustered, 'a_AU'],
@@ -199,12 +200,12 @@ sc = ax.scatter(
 
 ax.set_xlabel('Semi-major axis (a) [AU]')
 ax.set_ylabel('Eccentricity (e)')
-ax.set_zlabel('Inclination (i)')
+ax.set_zlabel('Inclination (sin(i)))')
 
-ax.set_xlim(2, 3.5)
-ax.set_ylim(0, 0.3)
-ax.set_zlim(0, 20)
+ax.set_xlim(a_AU_min, a_AU_max)
+ax.set_ylim(e_min, e_max)
+ax.set_zlim(sin_I_min, sin_I_max)
 
-ax.set_title('Proper Element Space (a, e, i)')
+ax.set_title(f"Proper Element Space (a, e, i) | HCM radius: {radius}")
 
 plt.show()
