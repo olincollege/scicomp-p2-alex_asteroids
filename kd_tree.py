@@ -115,15 +115,15 @@ labeled_csv_path = base_path + "asteroid_clusters_full.csv"
 df.to_csv(labeled_csv_path, index=False)
 print(f"Labeled dataset saved to: {labeled_csv_path}")
 
-##### saving summary dataset #####
-cluster_summary = pd.DataFrame({
-    'cluster_id': [cid for cid, c in enumerate(clusters) if len(c) >= min_size],
-    'size': [len(c) for c in clusters if len(c) >= min_size],
-    }
-)
-summary_csv_path = base_path + "asteroid_clusters_summary.csv"
-cluster_summary.to_csv(summary_csv_path, index=False)
-print(f"Summarized dataset saved to: {summary_csv_path}")
+# ##### saving summary dataset #####
+# cluster_summary = pd.DataFrame({
+#     'cluster_id': [cid for cid, c in enumerate(clusters) if len(c) >= min_size],
+#     'size': [len(c) for c in clusters if len(c) >= min_size],
+#     }
+# )
+# summary_csv_path = base_path + "asteroid_clusters_summary.csv"
+# cluster_summary.to_csv(summary_csv_path, index=False)
+# print(f"Summarized dataset saved to: {summary_csv_path}")
 
 
 
@@ -133,7 +133,7 @@ from mpl_toolkits.mplot3d import Axes3D  # ensures 3D projection works
 
 clustered = subset['cluster_id'] >= 0
 unclustered = subset['cluster_id'] == -1
-num_clustered_filtered = len(clustered)
+num_clustered_filtered = len(np.unique(labels[labels >= 0]))
 
 # --- a vs sin(i) ---
 plt.figure()
