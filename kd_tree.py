@@ -2,21 +2,16 @@
 Asteroid family detection through kd_tree clustering.
 """
 
-# Imports #
+##### Imports #####
 import numpy as np
 from sklearn.neighbors import KDTree
 import pandas as pd
 
-# set these values!! #
+# user inputs #
+from user_inputs import a_AU_min, a_AU_max, e_min, e_max, sin_I_min, sin_I_max
+
+# set this valu!! #
 radius = 0.0018
-a_AU_min = 2.5 #2
-a_AU_max = 3.3 #3.5
-# a_AU_min = 2.825
-# a_AU_max = 2.958
-e_min = 0
-e_max = 0.5
-sin_I_min = 0
-sin_I_max = np.sin(np.radians(20))
 
 
 
