@@ -1,5 +1,5 @@
 """
-Asteroid family detection through HCM.
+Asteroid family detection through kd_tree clustering.
 """
 
 # Imports #
@@ -37,11 +37,17 @@ subset = df[
 ].copy()
 
 
-# HCM clustering function #
-def hcm_clustering(data, radius):
+# kd_tree clustering function #
+def kd_tree_clustering(data:np.array, radius:int)->list:
     """
-    data: Nx3 array of (a, e, sin(i))
-    radius: distance cutoff
+    Run HCM clustering using kd_tree clustering algorithm. Returns found clusters.
+
+    Args:
+        data (Numpy Array): Nx3 array of (a, e, sin(i))
+        radius: distance cutoff
+
+    Returns:
+        clusters: List containing all clusters found with kd_tree algorithm.
     """
 
     # building KDTree - spatial index to avoid checking every asteroid against every other asteroid
@@ -90,7 +96,7 @@ def hcm_clustering(data, radius):
 # Running the algorithm
 X = subset[['a_AU', 'e', 'sin_I']].values # only running subset!
 
-clusters = hcm_clustering(X, radius=radius)
+clusters = kd_tree_clustering(X, radius=radius)
 raw_num_clusters = len(clusters)
 print("Raw number of clusters:", raw_num_clusters)
 
@@ -115,15 +121,15 @@ labeled_csv_path = base_path + "asteroid_clusters_full.csv"
 df.to_csv(labeled_csv_path, index=False)
 print(f"Labeled dataset saved to: {labeled_csv_path}")
 
-# ##### saving summary dataset #####
-# cluster_summary = pd.DataFrame({
-#     'cluster_id': [cid for cid, c in enumerate(clusters) if len(c) >= min_size],
-#     'size': [len(c) for c in clusters if len(c) >= min_size],
-#     }
-# )
-# summary_csv_path = base_path + "asteroid_clusters_summary.csv"
-# cluster_summary.to_csv(summary_csv_path, index=False)
-# print(f"Summarized dataset saved to: {summary_csv_path}")
+##### saving summary dataset #####
+cluster_summary = pd.DataFrame({
+    'cluster_id': [cid for cid, c in enumerate(clusters) if len(c) >= min_size],
+    'size': [len(c) for c in clusters if len(c) >= min_size],
+    }
+)
+summary_csv_path = base_path + "asteroid_clusters_summary.csv"
+cluster_summary.to_csv(summary_csv_path, index=False)
+print(f"Summarized dataset saved to: {summary_csv_path}")
 
 
 
