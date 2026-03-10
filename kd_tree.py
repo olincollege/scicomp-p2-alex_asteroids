@@ -10,7 +10,7 @@ import pandas as pd
 # user inputs #
 from user_inputs import a_AU_min, a_AU_max, e_min, e_max, sin_I_min, sin_I_max
 
-# set this valu!! #
+# set this value!! #
 radius = 0.0018
 
 
@@ -33,16 +33,16 @@ subset = df[
 
 
 # kd_tree clustering function #
-def kd_tree_clustering(data:np.array, radius:int)->list:
+def kd_tree_clustering(data:np.ndarray, radius:float)->list:
     """
     Run HCM clustering using kd_tree clustering algorithm. Returns found clusters.
 
     Args:
         data (Numpy Array): Nx3 array of (a, e, sin(i))
-        radius: distance cutoff
+        radius (float): distance cutoff
 
     Returns:
-        clusters: List containing all clusters found with kd_tree algorithm.
+        clusters (list): List containing all clusters found with kd_tree algorithm.
     """
 
     # building KDTree - spatial index to avoid checking every asteroid against every other asteroid
