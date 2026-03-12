@@ -24,7 +24,7 @@ df_labeled = pd.read_csv(validation_data_path)
 
 # cluster dataset
 base_path = "/mnt/c/Users/amineeva/OneDrive - Olin College of Engineering/2025-2026/Semester 2/Scientific Computing/Project 2 - Asteroids/"
-clustered_data_path = base_path + "asteroid_clusters_full_r0015.csv"
+clustered_data_path = base_path + "asteroid_clusters_full_r0012.csv"
 df_clustered = pd.read_csv(clustered_data_path)
 
 
