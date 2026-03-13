@@ -212,8 +212,8 @@ The `requirements.txt` file contains the required package imports:
 
 ### Pt 1: Clone the repository
 ```
-git clone https://github.com/olincollege/scicomp-p1-alex_ants.git
-cd scicomp-p1-alex_ants/
+git clone git@github.com:olincollege/scicomp-p2-alex_asteroids.git
+cd scicomp-p2-alex_asteroids/
 ```
 
 Install dependencies:
