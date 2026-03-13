@@ -155,6 +155,7 @@ The creator of this repository is Alex Mineeva (amineeva).
 
 ## Sources
 
-Original Paper: https://articles.adsabs.harvard.edu/pdf/1918AJ.....31..185H
+Zappalà, V., Cellino, A., Farinella, P., & Knežević, Z. (1990). Asteroid Families. I. Identification by Hierarchical Clustering and Reliability Assessment. The Astronomical Journal, 100, 2030–2046.
+https://ui.adsabs.harvard.edu/abs/1990AJ....100.2030Z/abstract
 
 Datasets: https://newton.spacedys.com/astdys2/index.php?pc=5
