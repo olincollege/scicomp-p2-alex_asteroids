@@ -118,21 +118,62 @@ The two benchmarks that I used to evaluate my clustering algorithms are `purity`
 <table>
   <tr>
     <td align="center">
-      <img src="images/a_vs_sini_r0018.png" width="600"><br>
-      Semi-major axis (AU) vs. Inclination (°)
+      <img src="images/kd_tree/a_vs_sini_r0018.png" width="600"><br>
+      Semi-major axis (AU) vs. sin(Inclination) (°)
     </td>
     <td align="center">
-      <img src="images/e_vs_sini_r0018.png" width="600"><br>
-      Eccentricity vs. Inclination (°)
+      <img src="images/kd_tree/e_vs_sini_r0018.png" width="600"><br>
+      Eccentricity vs. sin(Inclination) (°)
     </td>
     <td align="center">
-      <img src="images/a_vs_e_vs_sini_r0018.png" width="600"><br>
-      3D representation of clusters (a, e, i)
+      <img src="images/kd_tree/a_vs_e_vs_sini_r0018.png" width="600"><br>
+      3D representation of clusters (a, e, sin(i))
+    </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td align="center">
+      <img src="images/kd_tree/kdtree_r0018_completeness.png" width="600"><br>
+      Completeness Plot
+    </td>
+    <td align="center">
+      <img src="images/kd_tree/kdtree_r0018_purity.png" width="600"><br>
+      Purity Plot
     </td>
   </tr>
 </table>
 
 ### Ball Tree Algorithm
+#### r = 0.0018
+<table>
+  <tr>
+    <td align="center">
+      <img src="images/ball_tree/ball_tree_a_vs_sini_r0018.png" width="600"><br>
+      Semi-major axis (AU) vs. sin(Inclination) (°)
+    </td>
+    <td align="center">
+      <img src="images/ball_tree/ball_tree_e_vs_sini_r0018.png" width="600"><br>
+      Eccentricity vs. sin(Inclination) (°)
+    </td>
+    <td align="center">
+      <img src="images/ball_tree/ball_tree_a_vs_e_vs_sini_r0018.png" width="600"><br>
+      3D representation of clusters (a, e, sin(i))
+    </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td align="center">
+      <img src="images/ball_tree/balltree_r0018_completeness.png" width="600"><br>
+      Completeness Plot
+    </td>
+    <td align="center">
+      <img src="images/ball_tree/balltree_r0018_purity.png" width="600"><br>
+      Purity Plot
+    </td>
+  </tr>
+</table>
 
 ### HCM Benchmark Results (r = 0.0018)
 
