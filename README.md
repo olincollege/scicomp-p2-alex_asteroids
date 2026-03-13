@@ -112,7 +112,7 @@ KDTree and BallTree produced identical clustering results because both perform t
 | r | KDTree | BallTree |
 |---| --- | ---- |
 |0.001 |4:13 | |
-|0.0015 | 4:21 | |
+|0.0015 | 4:21 | 9:21 |
 |0.002 | 4:50 | 9:36 |
 
 
