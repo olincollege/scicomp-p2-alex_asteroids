@@ -2,13 +2,42 @@
 Contains main script to run machine learning algorithms on the data.
 """
 
+##### Imports #####
+import pandas as pd
+from var_parameters import a_AU_min, a_AU_max, e_min, e_max, sin_I_min, sin_I_max
+from ball_tree import run_ball_tree_clustering
+from kd_tree import run_kd_tree_clustering
+import HCM
 
-# Goals:
-# - load in data (done!)
-# - create basic plots (done)
-# - Read Asteroid Paper
-# - Determine what machine learning methods I want to try (done) -> K-means and Heirarchical clustering (more notes on this in my notes doc)
-# - Determine which asteroid families I will attempt to identify and why
-# - Research clustering method 1
 
-# - input official labeled dataset, figure out how to compare the clusters from the labeled output dataset to the official set -> get correctness score
+##### User Inputs #####
+base_path = "/mnt/c/Users/amineeva/OneDrive - Olin College of Engineering/2025-2026/Semester 2/Scientific Computing/Project 2 - Asteroids/"
+radius = 0.0018
+clustering_alg = "ball_tree" # kd_tree
+min_size = 50
+
+
+# Loading in dataset #
+asteroid_data_output_path = base_path + "Synthetic_Proper_Elements_Hirayama_full_dataset.csv"
+df = pd.read_csv(asteroid_data_output_path)
+
+# getting subset of data
+subset = df[
+    (df['a_AU'] > a_AU_min) &
+    (df['a_AU'] < a_AU_max) &
+    (df['sin_I'] >= sin_I_min) &
+    (df['sin_I'] <= sin_I_max) &
+    (df['e'] > e_min) &
+    (df['e'] < e_max)
+].copy()
+
+
+# Run KDTree Clustering
+
+
+X, clusters, raw_num_clusters = HCM.run_nearest_neighbor(subset, clustering_alg, radius)
+labels, subset = HCM.labeling_cleaning_dataset(subset, X, clusters, min_size)
+HCM.save_clustering_csvs(df, subset, clusters, labels, base_path, clustering_alg, radius, min_size)
+HCM.visualize_cluster_plots(clustering_alg, float, labels, subset, raw_num_clusters)
+
+
