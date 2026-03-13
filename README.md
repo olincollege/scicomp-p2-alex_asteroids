@@ -1,6 +1,8 @@
 # Scientific Computing Project 2: Asteroid Family Classification
 
-This repository holds the code for the second project in ENGR3560: Scientific Computing. The benchmark for this project is to identify eight asteroid families to 95% completeness. This repository shows the results of two different clustering methods: **KDTree** and **BallTree**, and how they compare to a labeled dataset of asteroid families. The labeled dataset is from the AstDys group, founded by A. Milani: https://newton.spacedys.com/astdys2/index.php?pc=5.
+This repository holds the code for the second project in ENGR3560: Scientific Computing. The benchmark for this project is to identify eight asteroid families to 95% completeness.
+
+My project looks at Heirarchical Clustering Method (HCM) clustering on asteroids. This repository shows the results of two different clustering methods: **KDTree** and **BallTree**, and how they compare to a labeled dataset of asteroid families. KDTree and BallTree are used to efficiently find neighbors within the HCM cutoff radius. The labeled dataset is from the AstDys group, founded by A. Milani: https://newton.spacedys.com/astdys2/index.php?pc=5.
 
 This project is implemented in Python. The datasets used for this project are from the 1919 paper "Groups of Asteroids Probbaly of Common Origin" by Kiyotsugu Hirayama.
 
@@ -10,7 +12,6 @@ This project is implemented in Python. The datasets used for this project are fr
 - currently data must be downloaded manually, and then the paths need to be changed in the txt_csv_converter.py file -> add 'requests' package here to automate this process
 - add pictures of a, e, sin(i) to the key sim variables section
 - add checks 
-- write ball tree algorithm
 
 
 ## Key Simulation Variables
@@ -69,9 +70,19 @@ The validation characteristics I have chosen to use to assess the correctness of
 
 ## Clustering Algorithms
 
+KDTree and BallTree are spatial indexing clustering algorithm used to speed up nearest-neighbor searches in multi-dimensional data. The two algorithms serve the same purpose, but have different strengths depending on the data. Both algorithms are used under-the-hood for the Heirarchical Clustering Method (HCM), which is often used in asteroid family classification.
+
 ### KDTree
+https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KDTree.html
+
+- Works best in low-dimensional data
+- Splits data along hyperplanes - split using one dimension at a time
 
 ### BallTree
+https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.BallTree.html#sklearn.neighbors.BallTree
+
+- Works best in higher-dimensional data
+- Splits data into hyperspheres (spheres)
 
 ## Usage Examples & Benchmarks
 
@@ -80,12 +91,12 @@ For this project, I specifically chose to look at two nearest-neighbor algorithm
 I looked at r values 
 
 **INCLUDE THE DIFFERENT R VALUES THAT I'M SHOWING AND WHY**
-| r | Purity (KDTree)        | Completeness (KDTree) | Purity (BallTree)        | Completeness (BallTree) |
-| --------- | --------------- | -------- | --------------- | -------- |
-| 0.0012         |   100%  | 24.40% | | |
-| 0.0015         | 99.99%  | 34.23%  | | |
-| 0.0018         | 94.64%  | 43.65%  | | |
-| 0.002         | Back-Right      | (1, 1)   | | |
+|    r    | Purity (KDTree) | Completeness (KDTree) | Purity (BallTree) | Completeness (BallTree) |
+| ------- | --------------- | --------------------- | ----------------- | ----------------------- |
+| 0.0012  |       100%      | 24.40% | 100% | 24.40% |
+| 0.0015  |      99.99%     | 34.23%  |  |  |
+| 0.0018  |      94.64%     | 43.65%  | 94.64% | 43.65% |
+| 0.002   |                 |  | 89.07% | 47.05% |
 
 
 ### KD tree algorithm
