@@ -266,9 +266,6 @@ python main.py
 
 Due to a smaller amount of time on this project, I was unable to add the code validation and fortification procedures to my desired amount. However, throughout my process I output lots of plots, which should be used to visually check the clustering algorithm. Another good check to do is to make sure that the data you're using is the correct data - the datasets I used are detailed elsehwere in this README, and it is good to confirm that you use the same ones. 
 
-- reading in the dataset correctly
-- visual checks of the data
-- check for the function that I'm going to write that checks the clusters from clustering algs to the known clusters from the website
 
 ## File Structure
 
