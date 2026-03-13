@@ -222,7 +222,7 @@ pip install -r requirements.txt
 ```
 
 ### Pt 2: Download data files
-The data files from AstDys are too large to upload to GitHub, so you will need to download them directly off of AstDys.
+The data files from AstDys are too large to upload to GitHub, so you will need to download them directly off of AstDys (https://newton.spacedys.com/astdys2/index.php?pc=5). 
 
 #### Step 1: Navigate the AstDys and locate datasets
 <img src="images/Datasets_to_download.png" width="600">
