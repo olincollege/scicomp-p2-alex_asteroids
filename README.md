@@ -1,4 +1,4 @@
-# Python Project Template Repository
+# Scientific Computing Project 2: Asteroid Family Classification
 
 This repository holds the code for the second project in ENGR3560: Scientific Computing. The benchmark for this project is to identify eight asteroid families to 95% completeness. This repository shows the results of two different clustering methods: **KDTree** and **BallTree**, and how they compare to a labeled dataset of asteroid families. The labeled dataset is from the AstDys group, founded by A. Milani: https://newton.spacedys.com/astdys2/index.php?pc=5.
 
