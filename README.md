@@ -279,6 +279,8 @@ your repository for assessment, etc.
 
 ## File Structure
 
+`Asteroid_family_exploration.ipynb` - Initial Jupyter Notebook, plots general asteroid data.
+
 `HCM.py` - Contains functions to run Heirarchical Clustering Method (HCM) for asteroids.
 
 `ball_tree.py` - Ball Tree nearest neighbor algorithm.
