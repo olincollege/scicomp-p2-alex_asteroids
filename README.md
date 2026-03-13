@@ -7,11 +7,6 @@ My project looks at Heirarchical Clustering Method (HCM) clustering on asteroids
 This project is implemented in Python. The datasets used for this project are from the 1919 paper "Groups of Asteroids Probbaly of Common Origin" by Kiyotsugu Hirayama.
 
 
-## To-do:
-- currently data must be downloaded manually, and then the paths need to be changed in the txt_csv_converter.py file -> add 'requests' package here to automate this process
-- add checks 
-
-
 ## Key Simulation Variables
 `a` - Semi-major axis (AU)
 
