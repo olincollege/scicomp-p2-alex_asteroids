@@ -109,7 +109,7 @@ The two benchmarks that I used to evaluate my clustering algorithms are `purity`
 | 0.0012  |       100%      | 24.40% | 100% | 24.40% |
 | 0.0015  |      99.99%     | 34.23%  | 99.99% | 34.23% |
 | 0.0018  |      94.64%     | 43.65%  | 94.64% | 43.65% |
-| 0.002   |                 |  | 89.07% | 47.05% |
+| 0.002   |      89.07%     | 47.05% | 89.07% | 47.05% |
 
 
 ### KD tree Algorithm
