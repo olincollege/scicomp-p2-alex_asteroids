@@ -281,6 +281,8 @@ Due to a smaller amount of time on this project, I was unable to add the code va
 
 `main.py` - Contains main script to run machine learning algorithms on the data.
 
+`test_HCM` - Contains some tests for `run_nearest_neighbor()` in HCM.py.
+
 `txt_csv_converter.py` - Converts .txt dataset into usable .csv file that will run with the clustering algorithms.
 
 `var_parameters.py` - Contains user inputs parameters for all files in asteroid clustering.
