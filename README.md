@@ -59,7 +59,7 @@ Characteristics:
 
 ### Dataset Overlap
 
-The validation characteristics I have chosen to use to assess the correctness of my clustering algorithms only look at asteroids that **appear in both datasets.** This means that multi-opposition asteroids appear in the clustered plots, but are not included in the validation metrics (purity and correctness). Only numbered asteroids with analytical proper elements are used.
+The validation characteristics I have chosen to use to assess the correctness of my clustering algorithms only look at asteroids that **appear in both datasets.** This means that multi-opposition asteroids appear in the clustered plots, but are not included in the validation metrics (purity and complteness). Only numbered asteroids with analytical proper elements are used.
 
 ## Nearest-Neighbor Algorithms
 
@@ -107,18 +107,13 @@ The two benchmarks that I used to evaluate my clustering algorithms are ***purit
 
 You will notice that the results summary table, which averages results across all non-exluded clusters (excluded if there are fewer than a minimum number of asteroids (50)) are identical across the two different nearest-neighbor search methods. 
 
-KDTree and BallTree produced identical clustering results because both perform the exact same Euclidian radius queries; they differ only in internal search efficiency, not in the neighbors returned.
-
-Time taken 
-r = 0.002 KDTree 4:13 BallTree 
-r = 0.0015 KDTree 4:21 
-r = 0.001 KDTree 4:50
+KDTree and BallTree produced identical clustering results because both perform the exact same Euclidian radius queries; they differ only in internal search efficiency, not in the neighbors returned. The table below shows the runtime difference across different `r` values.
 
 | r | KDTree | BallTree |
 |---| --- | ---- |
 |0.001 |4:13 | |
 |0.0015 | 4:21 | |
-|0.002 | 4:50 | |
+|0.002 | 4:50 | 9:36 |
 
 
 
@@ -200,6 +195,8 @@ Here are my top 8 asteroid families evaluated using the HCM clustering pipeline.
 | 3 | 3798 | 3784 | 0.996 | 1.000 | 4336 | 0.873 |
 | 618 | 477 | 475 | 0.996 | 0.981 | 564 | 0.842 |
 | 293 | 1706 | 1696 | 0.994 | 1.000 | 2030 | 0.835 |
+
+This table displays the families with the highest completeness (`Completeness`) values, as taken from my HCM clustering algorithm. Using this metric, all 8 of my families fulfill the 95% correctness criteria. However, there are important considerations to take into account when using this algorithm. A big consideration is that I use the merged dataset to compute the `Completeness` and `Purity` values, meaning that I'm only using asteroids that appear in **both** datasets (clustering and labeled). Doing so excludes multi-opposition asteroids and main belt asteroids that are locked in secular resonance, which means that the results aren't that useful for capturing the "true" completeness of each asteroid family. I have included the column `Correctness (Full)`, which compares the number of correctly clustered asteroids to the number of asteroids per family in the labeled dataset, giving a slightly more realistic value. 
 
 ## Requirements
 
