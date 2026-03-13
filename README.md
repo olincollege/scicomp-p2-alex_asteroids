@@ -2,7 +2,7 @@
 
 This repository holds the code for the second project in ENGR3560: Scientific Computing. The benchmark for this project is to identify eight asteroid families to 95% completeness.
 
-My project looks at Heirarchical Clustering Method (HCM) clustering on asteroids. This repository shows the results of two different clustering methods: **KDTree** and **BallTree**, and how they compare to a labeled dataset of asteroid families. KDTree and BallTree are used to efficiently find neighbors within the HCM cutoff radius. The labeled dataset is from the AstDys group, founded by A. Milani: https://newton.spacedys.com/astdys2/index.php?pc=5.
+My project looks at Heirarchical Clustering Method (HCM) clustering on asteroids. This repository shows the results of two different nearest-neighbor search methods: **KDTree** and **BallTree**, and how they compare to a labeled dataset of asteroid families. KDTree and BallTree are used to efficiently find neighbors within the HCM cutoff radius. The labeled dataset is from the AstDys group, founded by A. Milani: https://newton.spacedys.com/astdys2/index.php?pc=5.
 
 This project is implemented in Python. The datasets used for this project are from the 1919 paper "Groups of Asteroids Probbaly of Common Origin" by Kiyotsugu Hirayama.
 
@@ -26,15 +26,15 @@ This project is implemented in Python. The datasets used for this project are fr
   <tr>
     <td align="center">
       <img src="images/2D_a_vs_sini.png" width="600"><br>
-      Semi-major axis (AU) vs. Inclination (°)
+      Semi-major axis (AU) vs. sin(Inclination) (°)
     </td>
     <td align="center">
       <img src="images/2D_e_vs_sini.png" width="600"><br>
-      Eccentricity vs. Inclination (°)
+      Eccentricity vs. sin(Inclination) (°)
     </td>
     <td align="center">
       <img src="images/3D_visible_clusters_sini.png" width="500"><br>
-      3D representation of clusters (a, e, i)
+      3D representation of clusters (a, e, sin(i))
     </td>
   </tr>
 </table>
@@ -86,11 +86,24 @@ https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.BallTree.htm
 
 ## Usage Examples & Benchmarks
 
-For this project, I specifically chose to look at two nearest-neighbor algorithms: KD trees and ball tree algorithms. Both of these are used under the hood of DBSCAN, an algorithm which is referenced in multiple asteroid family clustering papers.
+For this project, I specifically chose to look at two nearest-neighbor algorithms: KD trees and ball tree algorithms. Both of these are used to speed up the process of HCM, a distance-based heirarchical clustering algorithm, often used as the standard multiple asteroid family clustering papers. 
 
-I looked at r values 
+I looked at `r` values `0.0012`, `0.0015`, `0.0018`, `0.002`. I did not run any parameter sweeps, but from trial and error these values produce the best results.
 
-**INCLUDE THE DIFFERENT R VALUES THAT I'M SHOWING AND WHY**
+
+The two benchmarks that I used to evaluate my clustering algorithms are `purity` and `completeness`. 
+
+`purity`: correctly clustered asteroids / total clustered asteroids from the merged clustered-labeled dataset
+
+-> *Are all of the asteroids in a cluster determined to be a particular family actually part of that family? How pure are my clusters?*
+
+`completeness`: correctly clustered asteroids / total labeled asteroids from the merged clustered-labeled dataset
+
+-> *How many labeled asteroids did the cluster actually catch? (Unclustered asteroids count as missing)*
+
+
+### Results Summary Table - average across all families
+
 |    r    | Purity (KDTree) | Completeness (KDTree) | Purity (BallTree) | Completeness (BallTree) |
 | ------- | --------------- | --------------------- | ----------------- | ----------------------- |
 | 0.0012  |       100%      | 24.40% | 100% | 24.40% |
@@ -99,7 +112,7 @@ I looked at r values
 | 0.002   |                 |  | 89.07% | 47.05% |
 
 
-### KD tree algorithm
+### KD tree Algorithm
 
 The key variable for the kd tree algorithm is r - this is the radius of distance that determines whether or not asteroid neigh
 
@@ -120,6 +133,8 @@ The key variable for the kd tree algorithm is r - this is the radius of distance
     </td>
   </tr>
 </table>
+
+### Ball Tree Algorithm
 
 ## Requirements
 
