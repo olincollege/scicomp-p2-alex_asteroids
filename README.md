@@ -165,6 +165,20 @@ your repository for assessment, etc.
 
 ## File Structure
 
+`HCM.py` - Contains functions to run Heirarchical Clustering Method (HCM) for asteroids.
+
+`ball_tree.py` - Ball Tree nearest neighbor algorithm.
+
+`benchmark_validation.py` - Compares clustered data to labeled data, gives a correctness score. The benchmark for this project is 95% correctness, calculates purity and completeness scores.
+
+`kd_tree.py` - KDTree nearest neighbor algorithm.
+
+`main.py` - Contains main script to run machine learning algorithms on the data.
+
+`txt_csv_converter.py` - Converts .txt dataset into usable .csv file that will run with the clustering algorithms.
+
+`var_parameters.py` - Contains user inputs parameters for all files in asteroid clustering.
+
 ## Author
 The creator of this repository is Alex Mineeva (amineeva).
 
