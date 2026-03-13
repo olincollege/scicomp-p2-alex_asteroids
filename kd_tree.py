@@ -11,7 +11,7 @@ import pandas as pd
 from user_inputs import a_AU_min, a_AU_max, e_min, e_max, sin_I_min, sin_I_max
 
 # set this value!! #
-radius = 0.0018
+radius = 0.002
 
 
 
