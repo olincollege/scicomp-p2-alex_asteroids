@@ -13,7 +13,7 @@ from benchmark_validation import run_benchmarking
 
 ##### User Inputs #####
 base_path = "/mnt/c/Users/amineeva/OneDrive - Olin College of Engineering/2025-2026/Semester 2/Scientific Computing/Project 2 - Asteroids/"
-radius = 0.002
+radius = 0.001
 clustering_alg = "kd_tree" # ball_tree
 min_size = 50
 
