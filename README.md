@@ -4,10 +4,6 @@ This repository holds the code for the second project in ENGR3560: Scientific Co
 
 This project is implemented in Python. The datasets used for this project are from the 1919 paper "Groups of Asteroids Probbaly of Common Origin" by Kiyotsugu Hirayama.
 
-**INCLUDE THE DIFFERENT R VALUES THAT I'M SHOWING AND WHY**
-
-
-
 
 ## To-do:
 - fill out README
@@ -71,10 +67,26 @@ Characteristics:
 
 The validation characteristics I have chosen to use to assess the correctness of my clustering algorithms only look at asteroids that **appear in both datasets.** This means that multi-opposition asteroids appear in the clustered plots, but are not included in the validation metrics (purity and correctness). Only numbered asteroids with analytical proper elements are used.
 
+## Clustering Algorithms
+
+### KDTree
+
+### BallTree
 
 ## Usage Examples & Benchmarks
 
 For this project, I specifically chose to look at two nearest-neighbor algorithms: KD trees and ball tree algorithms. Both of these are used under the hood of DBSCAN, an algorithm which is referenced in multiple asteroid family clustering papers.
+
+I looked at r values 
+
+**INCLUDE THE DIFFERENT R VALUES THAT I'M SHOWING AND WHY**
+| r | Purity (KDTree)        | Completeness (KDTree) | Purity (BallTree)        | Completeness (BallTree) |
+| --------- | --------------- | -------- | --------------- | -------- |
+| 0.0012         |   100%  | 24.40% | | |
+| 0.0015         | 99.99%  | 34.23%  | | |
+| 0.0018         | 94.64%  | 43.65%  | | |
+| 0.002         | Back-Right      | (1, 1)   | | |
+
 
 ### KD tree algorithm
 
@@ -100,23 +112,13 @@ The key variable for the kd tree algorithm is r - this is the radius of distance
 
 ## Requirements
 
-The `requirements.txt` file is blank and should be filled out with any project
-dependencies. There is a Python package called `pipreqs` that autogenerates the
-contents of the `requirements.txt` file based on the `import` statements in your
-`.py` files. To get this, run
+The `requirements.txt` file contains the required package imports:
 
-```
-pip install pipreqs
-```
+- matplotlib~=3.10.8
+- numpy~=2.4.2
+- pandas~=3.0.0
+- scikit_learn~=1.8.0
 
-Then, in the root of your project repository, run:
-
-```
-pipreqs --mode compat
-```
-
-If you already have a `requirements.txt`, the above command will ask you to
-rerun the command with the `--force` flag to overwrite it.
 
 ## How to Use
 
