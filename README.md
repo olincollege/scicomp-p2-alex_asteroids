@@ -18,8 +18,6 @@ This project is implemented in Python. The datasets used for this project are fr
 
 
 ## Key Simulation Variables
-a, e, i -> sin(i) in the data, but turned into i
-
 `a` - Semi-major axis (AU)
 
 `e` - Eccentricity (unitless)
