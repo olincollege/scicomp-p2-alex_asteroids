@@ -1,10 +1,10 @@
 # Python Project Template Repository
 
-This repository holds the code for the second project in ENGR3560: Scientific Computing. The goal is to reach a 95% accuracy rate 
+This repository holds the code for the second project in ENGR3560: Scientific Computing. The benchmark for this project is to identify eight asteroid families to 95% completeness. This repository shows the results of two different clustering methods: **KDTree** and **BallTree**, and how they compare to a labeled dataset of asteroid families. The labeled dataset is from the AstDys group, founded by A. Milani: https://newton.spacedys.com/astdys2/index.php?pc=5.
 
-This project compares the results from two different clustering algorithms: K-means and heirarchical.
-- include the original reference paper and the screenshot in the notes document
-Link to original dataset: https://newton.spacedys.com/astdys2/index.php?pc=5
+This project is implemented in Python. The datasets used for this project are from the 1919 paper "Groups of Asteroids Probbaly of Common Origin" by Kiyotsugu Hirayama.
+
+**INCLUDE THE DIFFERENT R VALUES THAT I'M SHOWING AND WHY**
 
 
 
@@ -14,7 +14,6 @@ Link to original dataset: https://newton.spacedys.com/astdys2/index.php?pc=5
 - currently data must be downloaded manually, and then the paths need to be changed in the txt_csv_converter.py file -> add 'requests' package here to automate this process
 - add pictures of a, e, sin(i) to the key sim variables section
 - add checks 
-- write algorithm to compare the clustering data to the labeled data
 - write ball tree algorithm
 
 
@@ -49,7 +48,7 @@ The 2D and 3D representations show the clusters that appear in the asteroid data
 
 ## Datasets Used
 
-### Clustering Datase
+### Clustering Dataset
 
 Source: *Numbered and multiopposition asteroids* (AstDys)
 
@@ -57,17 +56,23 @@ This dataset defines the asteroids used as the input data for the clustering alg
 
 Characteristics:
 - Includes both numbered asteroids (objecst with well-known orbits) and multi-opposition asteroids (objects witih multiple observations but without assigned numbers).
-- Contains **Main Belt** nad **Hungaria** asteroids only.
+- Contains **Main Belt** and **Hungaria** asteroids only.
 
+### Labeled Dataset
 
-!!! Super important to mention that not looking at all asteroids in families according to the paper. 
+Source: *Proper elements computed analytically, algorithm version 9 (Numbered asteroids); proper elements* (AstDys)
 
-For clustering -> 'Numbered and multiopposition asteroids'
-  - (1, 2, 3, 4, 6, 7, 8, 9); no 5, 91, etc...
-  - objects that are either numbered (well-known orbit) or multiopposition (we have seen them multiple times but they're not numbered yet)
-  - also only looks at Main Belt and Hungaria (excludes Trojans, Trans Neptunian Objects)
-For labeled -> 'Proper elements computed analytically, algorithm version 9 (Numbered asteroids); proper elements
-  - numbered asteroids ONLY, no multi-opposition asteroids
+This dataset is used as the reference validation dataset. It is important to note that this catalog only contains **numbered** asteroids, so **some objects in the clustering dataset do not appear in the labeled dataset.**
+
+Characteristics:
+
+- Contains **numbered** asteroids (no multi-opposition).
+- Contains analytically computer proper orbital elements and family designation number.
+
+### Dataset Overlap
+
+The validation characteristics I have chosen to use to assess the correctness of my clustering algorithms only look at asteroids that **appear in both datasets.** This means that multi-opposition asteroids appear in the clustered plots, but are not included in the validation metrics (purity and correctness). Only numbered asteroids with analytical proper elements are used.
+
 
 ## Usage Examples & Benchmarks
 
@@ -138,3 +143,7 @@ your repository for assessment, etc.
 The creator of this repository is Alex Mineeva (amineeva).
 
 ## Sources
+
+Original Paper: https://articles.adsabs.harvard.edu/pdf/1918AJ.....31..185H
+
+Datasets: https://newton.spacedys.com/astdys2/index.php?pc=5
