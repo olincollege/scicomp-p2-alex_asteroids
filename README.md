@@ -61,7 +61,7 @@ Characteristics:
 
 The validation characteristics I have chosen to use to assess the correctness of my clustering algorithms only look at asteroids that **appear in both datasets.** This means that multi-opposition asteroids appear in the clustered plots, but are not included in the validation metrics (purity and correctness). Only numbered asteroids with analytical proper elements are used.
 
-## Clustering Algorithms
+## Nearest-Neighbor Algorithms
 
 KDTree and BallTree are spatial indexing clustering algorithm used to speed up nearest-neighbor searches in multi-dimensional data. The two algorithms serve the same purpose, but have different strengths depending on the data. Both algorithms are used under-the-hood for the Heirarchical Clustering Method (HCM), which is often used in asteroid family classification.
 
@@ -84,13 +84,13 @@ For this project, I specifically chose to look at two nearest-neighbor algorithm
 I looked at `r` values `0.0012`, `0.0015`, `0.0018`, `0.002`. I did not run any parameter sweeps, but from trial and error these values produce the best results.
 
 
-The two benchmarks that I used to evaluate my clustering algorithms are `purity` and `completeness`. 
+The two benchmarks that I used to evaluate my clustering algorithms are ***purity*** and ***completeness***. 
 
-`purity`: correctly clustered asteroids / total clustered asteroids from the merged clustered-labeled dataset
+***purity***: correctly clustered asteroids / total clustered asteroids from the merged clustered-labeled dataset
 
 -> *Are all of the asteroids in a cluster determined to be a particular family actually part of that family? How pure are my clusters?*
 
-`completeness`: correctly clustered asteroids / total labeled asteroids from the merged clustered-labeled dataset
+***completeness***: correctly clustered asteroids / total labeled asteroids from the merged clustered-labeled dataset
 
 -> *How many labeled asteroids did the cluster actually catch? (Unclustered asteroids count as missing)*
 
@@ -103,6 +103,24 @@ The two benchmarks that I used to evaluate my clustering algorithms are `purity`
 | 0.0015  |      99.99%     | 34.23%  | 99.99% | 34.23% |
 | 0.0018  |      94.64%     | 43.65%  | 94.64% | 43.65% |
 | 0.002   |      89.07%     | 47.05% | 89.07% | 47.05% |
+
+
+You will notice that the results summary table, which averages results across all non-exluded clusters (excluded if there are fewer than a minimum number of asteroids (50)) are identical across the two different nearest-neighbor search methods. 
+
+KDTree and BallTree produced identical clustering results because both perform the exact same Euclidian radius queries; they differ only in internal search efficiency, not in the neighbors returned.
+
+Time taken 
+r = 0.002 KDTree 4:13 BallTree 
+r = 0.0015 KDTree 4:21 
+r = 0.001 KDTree 4:50
+
+| r | KDTree | BallTree |
+|---| --- | ---- |
+|0.001 |4:13 | |
+|0.0015 | 4:21 | |
+|0.002 | 4:50 | |
+
+
 
 
 ### KD tree Algorithm
