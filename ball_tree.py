@@ -31,6 +31,8 @@ subset = df[
     (df['e'] < e_max)
 ].copy()
 
+r_str = str(radius).split(".")[1]
+
 
 # kd_tree clustering function #
 def ball_tree_clustering(data:np.array, radius:float)->list:
@@ -85,3 +87,132 @@ def ball_tree_clustering(data:np.array, radius:float)->list:
     
     # return list of all clusters
     return clusters
+
+
+
+
+
+
+######################################### THIS PART IS FULLY COPIED FROM KD_TREE ###########################################
+# Running the algorithm
+X = subset[['a_AU', 'e', 'sin_I']].values # only running subset!
+
+clusters = ball_tree_clustering(X, radius=radius)
+raw_num_clusters = len(clusters)
+print("Raw number of clusters:", raw_num_clusters)
+
+
+
+##### Labeling the dataset, removing clusters smaller than 50 #####
+labels = np.full(len(X), -1) # -1 if cluster too small
+min_size = 50
+
+for cid, cluster in enumerate(clusters):
+    if len(cluster) >= min_size:
+        labels[cluster] = cid
+
+subset['cluster_id'] = labels
+
+
+
+##### saving data for comparison #####
+df['cluster_id'] = -1
+df.loc[subset.index, 'cluster_id'] = labels
+labeled_csv_path = base_path + f"ball_tree_asteroid_clusters_full_r{r_str}.csv"
+df.to_csv(labeled_csv_path, index=False)
+print(f"Labeled dataset saved to: {labeled_csv_path}")
+
+##### saving summary dataset #####
+cluster_summary = pd.DataFrame({
+    'cluster_id': [cid for cid, c in enumerate(clusters) if len(c) >= min_size],
+    'size': [len(c) for c in clusters if len(c) >= min_size],
+    }
+)
+summary_csv_path = base_path + f"ball_tree_asteroid_clusters_summary_r{r_str}.csv"
+cluster_summary.to_csv(summary_csv_path, index=False)
+print(f"Summarized dataset saved to: {summary_csv_path}")
+
+
+
+##### Visualize the clusters #####
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D  # ensures 3D projection works
+
+clustered = subset['cluster_id'] >= 0
+unclustered = subset['cluster_id'] == -1
+num_clustered_filtered = len(np.unique(labels[labels >= 0]))
+
+# --- a vs sin(i) ---
+plt.figure()
+plt.scatter(
+    subset.loc[unclustered, 'a_AU'], 
+    subset.loc[unclustered, 'sin_I'], 
+    c='lightgray', s=0.1, alpha=0.2, label='Unclustered'
+)
+plt.scatter(
+    subset.loc[clustered, 'a_AU'], 
+    subset.loc[clustered, 'sin_I'], 
+    c=subset.loc[clustered, 'cluster_id'], s=0.1, alpha=0.8, cmap='tab20', label='Clusters'
+)
+plt.xlabel("a (AU)")
+plt.ylabel("sin(i)")
+plt.title("Semi-major axis (a) vs. Inclination (sin(i)) (Ball Tree)")
+plt.figtext(0.5, 0.001, f"Raw # of clusters: {raw_num_clusters}, Filtered # of clusters: {num_clustered_filtered}, HCM radius: {radius}", 
+            ha="center", fontsize=10)
+plt.savefig(f"a_vs_sini_r{r_str}.png", dpi=300, bbox_inches='tight')
+plt.close()
+
+# --- e vs sin(i) ---
+plt.figure()
+plt.scatter(
+    subset.loc[unclustered, 'e'], 
+    subset.loc[unclustered, 'sin_I'], 
+    c='lightgray', s=0.1, alpha=0.2, label='Unclustered'
+)
+plt.scatter(
+    subset.loc[clustered, 'e'], 
+    subset.loc[clustered, 'sin_I'], 
+    c=subset.loc[clustered, 'cluster_id'], s=0.1, alpha=0.8, cmap='tab20', label='Clusters'
+)
+plt.xlabel("e")
+plt.ylabel("sin(i)")
+plt.title("Eccentricity vs. Inclination (sin(i)) (Ball Tree)")
+plt.figtext(0.5, 0.001, f"Raw # of clusters: {raw_num_clusters}, Filtered # of clusters: {num_clustered_filtered}, HCM radius: {radius}", 
+            ha="center", fontsize=10)
+plt.savefig(f"e_vs_sini_r{r_str}.png", dpi=300, bbox_inches='tight')
+plt.close()
+
+# --- 3D plot ---
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+# Plot unclustered points in gray
+# ax.scatter(
+#     subset.loc[unclustered, 'a_AU'],
+#     subset.loc[unclustered, 'e'],
+#     subset.loc[unclustered, 'sin_I'],
+#     c='lightgray', s=0.01, alpha=0.2, label='Unclustered'
+# )
+
+sc = ax.scatter(
+    subset.loc[clustered, 'a_AU'],
+    subset.loc[clustered, 'e'],
+    subset.loc[clustered, 'sin_I'],
+    c=subset.loc[clustered, 'cluster_id'],
+    s=0.01,
+    alpha=0.8,
+    cmap='tab20',
+    label='Clusters'
+)
+
+ax.set_xlabel('Semi-major axis (a) [AU]')
+ax.set_ylabel('Eccentricity (e)')
+ax.set_zlabel('Inclination (sin(i)))')
+
+ax.set_xlim(a_AU_min, a_AU_max)
+ax.set_ylim(e_min, e_max)
+ax.set_zlim(sin_I_min, sin_I_max)
+
+ax.set_title(f"Proper Element Space (a, e, i) | HCM radius: {radius} | BallTree")
+
+plt.show()
