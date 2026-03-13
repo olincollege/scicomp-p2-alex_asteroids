@@ -107,7 +107,7 @@ The two benchmarks that I used to evaluate my clustering algorithms are ***purit
 
 You will notice that the results summary table, which averages results across all non-exluded clusters (excluded if there are fewer than a minimum number of asteroids (50)) are identical across the two different nearest-neighbor search methods. 
 
-KDTree and BallTree produced identical clustering results because both perform the exact same Euclidian radius queries; they differ only in internal search efficiency, not in the neighbors returned. The table below shows the runtime difference across different `r` values.
+KDTree and BallTree produced identical clustering results because both perform the exact same Euclidian radius queries; they differ only in internal search efficiency, not in the neighbors returned. The table below shows the runtime difference (minutes) across different `r` values.
 
 | r | KDTree | BallTree |
 |---| --- | ---- |
@@ -263,6 +263,8 @@ python main.py
 
 
 ## Code Validation
+
+Due to a smaller amount of time on this project, I was unable to add the code validation and fortification procedures to my desired amount. However, throughout my process I output lots of plots, which should be used to visually check the clustering algorithm. Another good check to do is to make sure that the data you're using is the correct data - the datasets I used are detailed elsehwere in this README, and it is good to confirm that you use the same ones. 
 
 - reading in the dataset correctly
 - visual checks of the data
