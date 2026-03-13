@@ -1,5 +1,5 @@
 """
-Converts .txt dataset into usable .csv file that will run with the machine learning algorithms.
+Converts .txt dataset into usable .csv file that will run with the clustering algorithms.
 """
 
 import pandas as pd

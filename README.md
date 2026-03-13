@@ -114,8 +114,6 @@ The two benchmarks that I used to evaluate my clustering algorithms are `purity`
 
 ### KD tree Algorithm
 
-The key variable for the kd tree algorithm is r - this is the radius of distance that determines whether or not asteroid neigh
-
 #### r = 0.0018
 <table>
   <tr>
@@ -135,6 +133,21 @@ The key variable for the kd tree algorithm is r - this is the radius of distance
 </table>
 
 ### Ball Tree Algorithm
+
+### HCM Benchmark Results (r = 0.0018)
+
+Here are my top 8 asteroid families evaluated using the HCM clustering pipeline.
+
+| Family ID | Total Family Asteroids | Correctly Clustered | Completeness | Purity | Cluster Size | Correctness (Full) |
+|----------|-----------------------|--------------------|-------------|-------|-------------|-------------------|
+| 606 | 1012 | 1012 | 1.000 | 1.000 | 1160 | 0.872 |
+| 396 | 1466 | 1466 | 1.000 | 1.000 | 1635 | 0.897 |
+| 3815 | 1782 | 1782 | 1.000 | 1.000 | 1975 | 0.902 |
+| 1189 | 184 | 184 | 1.000 | 1.000 | 208 | 0.885 |
+| 1547 | 1641 | 1641 | 1.000 | 1.000 | 1785 | 0.919 |
+| 3 | 3798 | 3784 | 0.996 | 1.000 | 4336 | 0.873 |
+| 618 | 477 | 475 | 0.996 | 0.981 | 564 | 0.842 |
+| 293 | 1706 | 1696 | 0.994 | 1.000 | 2030 | 0.835 |
 
 ## Requirements
 

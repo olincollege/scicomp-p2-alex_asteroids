@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+from var_parameters import a_AU_min, a_AU_max, e_min, e_max, sin_I_min, sin_I_max
 
 def run_nearest_neighbor(subset:pd.DataFrame, clustering_alg:str, radius:float)->tuple[np.ndarray, list[list[float]], int]:
     """
