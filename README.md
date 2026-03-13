@@ -8,9 +8,7 @@ This project is implemented in Python. The datasets used for this project are fr
 
 
 ## To-do:
-- fill out README
 - currently data must be downloaded manually, and then the paths need to be changed in the txt_csv_converter.py file -> add 'requests' package here to automate this process
-- add pictures of a, e, sin(i) to the key sim variables section
 - add checks 
 
 
@@ -201,6 +199,58 @@ The `requirements.txt` file contains the required package imports:
 
 
 ## How to Use
+
+### Pt 1: Clone the repository
+```
+git clone https://github.com/olincollege/scicomp-p1-alex_ants.git
+cd scicomp-p1-alex_ants/
+```
+
+Install dependencies:
+```
+pip install -r requirements.txt
+```
+
+### Pt 2: Download data files
+The data files from AstDys are too large to upload to GitHub, so you will need to download them directly off of AstDys.
+
+#### Step 1: Navigate the AstDys and locate datasets
+<img src="images/Datasets_to_download.png" width="600">
+
+`1` - clustering dataset
+
+`2` - labeled dataset
+
+#### Step 2: Click on each dataset, `ctrl s`, save to common folder
+I recommend creating a folder where everything for these runs can be stored and outputed.
+
+`1` - save this file as `Synthetic_Proper_Elements_Hirayama_full_dataset.txt`
+
+`2` - save this file as `all_tro.members.txt`
+
+#### Step 3: Run both files through `txt_csv_converter.py`
+Update the `base_path` and the and the input/output file endings: `asteroid_data_download_path`, `asteroid_data_output_path`.
+
+`1` - this file should be saved as `Synthetic_Proper_Elements_Hirayama_full_dataset.csv`
+
+`2` - this file should be saved as `all_tro.members.csv`
+
+### Pt 3: Run HCM
+
+#### Step 1: Update user inputs
+In `main.py` update the `user inputs` section. You must change the `base_path` to match where you have stored the clustering and labeling datasets. The default run values are:
+
+```
+radius = 0.002
+clustering_alg = "kd_tree" # ball_tree
+min_size = 50
+```
+
+#### Step 2: Run the simulation
+```
+python main.py
+```
+
 
 -> data file is too big to upload to github
 --> need to include directions for how to download the data from the website and probably have a script to run to turn it into an excel spreadsheet?
