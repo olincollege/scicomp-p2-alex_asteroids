@@ -108,6 +108,8 @@ def visualize_cluster_plots(clustering_alg:str, radius:float, labels:np.ndarray,
         subset (pd.DataFrame): Asteroid subset with cluster labels.
         raw_num_clusters (int): Number of clusters detected before filtering.
     """
+    r_str = str(radius).split(".")[1]
+
     clustered = subset['cluster_id'] >= 0
     unclustered = subset['cluster_id'] == -1
     num_clustered_filtered = len(np.unique(labels[labels >= 0]))
@@ -126,7 +128,7 @@ def visualize_cluster_plots(clustering_alg:str, radius:float, labels:np.ndarray,
     )
     plt.xlabel("a (AU)")
     plt.ylabel("sin(i)")
-    plt.title("Semi-major axis (a) vs. Inclination (sin(i)) (Ball Tree)")
+    plt.title(f"Semi-major axis (a) vs. Inclination (sin(i)) ({clustering_alg})")
     plt.figtext(0.5, 0.001, f"Raw # of clusters: {raw_num_clusters}, Filtered # of clusters: {num_clustered_filtered}, HCM radius: {radius}", 
                 ha="center", fontsize=10)
     plt.savefig(f"{clustering_alg}_a_vs_sini_r{r_str}.png", dpi=300, bbox_inches='tight')
@@ -146,7 +148,7 @@ def visualize_cluster_plots(clustering_alg:str, radius:float, labels:np.ndarray,
     )
     plt.xlabel("e")
     plt.ylabel("sin(i)")
-    plt.title("Eccentricity vs. Inclination (sin(i)) (Ball Tree)")
+    plt.title(f"Eccentricity vs. Inclination (sin(i)) ({clustering_alg})")
     plt.figtext(0.5, 0.001, f"Raw # of clusters: {raw_num_clusters}, Filtered # of clusters: {num_clustered_filtered}, HCM radius: {radius}", 
                 ha="center", fontsize=10)
     plt.savefig(f"{clustering_alg}_e_vs_sini_r{r_str}.png", dpi=300, bbox_inches='tight')
